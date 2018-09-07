@@ -1,5 +1,7 @@
 
 client-side features to consider:
+	- add h2 subtitle ('make your own to-do list')
+	- drag task li's up and down the list with mouse?
 	- if task too long, display only limited number of characters, and show full size in popup on double click
 	- edit task (on button click / on double click / on right click)
 	- clear task list / remove all tasks button (prompt for confirmation to remove all)

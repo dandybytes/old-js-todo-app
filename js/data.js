@@ -31,7 +31,6 @@ class Todo {
     try {
       if(taskNum > 0) {
         [this.todoList[taskNum-1], this.todoList[taskNum]] = [this.todoList[taskNum], this.todoList[taskNum-1]];
-        console.log('change produced');
         this.saveData();
       }
     } catch (e) {
