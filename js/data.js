@@ -2,7 +2,10 @@ class Todo {
   constructor() {
     this.todoList;
   }
-  getData() {
+  loadSampleData(sampleDataArr) {
+    this.todoList = sampleDataArr;
+  }
+  getDataLocalStorage() {
     const dataJSON = localStorage.getItem('todoData');
     try {
       this.todoList = dataJSON ? JSON.parse(dataJSON) : [];
@@ -10,18 +13,30 @@ class Todo {
       this.todoList = [];
     }
   }
-  saveData() {
+  saveDataLocalStorage() {
     localStorage.setItem('todoData', JSON.stringify(this.todoList));
   }
-  addTask(taskText) {
-    this.todoList.push(taskText);
-    this.saveData();
+  // getDataFileSystem() {
+    
+  // }
+  // saveDataFileSystem() {
+
+  // }
+  addTask(taskText, timeMilliseconds) {
+    this.todoList.push({
+      task: taskText,
+      created: timeMilliseconds,
+      updated: timeMilliseconds,
+      completed: false,
+      priority: 1
+    });
+    this.saveDataLocalStorage();
   }
   removeTask(taskNum) {
     taskNum = parseInt(taskNum);
     try {
       this.todoList.splice(taskNum, 1);
-      this.saveData();
+      this.saveDataLocalStorage();
     } catch (e) {
       console.error("ERROR: can't remove task");
     }
@@ -31,7 +46,7 @@ class Todo {
     try {
       if(taskNum > 0) {
         [this.todoList[taskNum-1], this.todoList[taskNum]] = [this.todoList[taskNum], this.todoList[taskNum-1]];
-        this.saveData();
+        this.saveDataLocalStorage();
       }
     } catch (e) {
       console.error("ERROR: can't move task up");
@@ -42,7 +57,7 @@ class Todo {
     try {
       if(taskNum < this.todoList.length - 1) {
         [this.todoList[taskNum+1], this.todoList[taskNum]] = [this.todoList[taskNum], this.todoList[taskNum+1]];
-        this.saveData();
+        this.saveDataLocalStorage();
       }
     } catch (e) {
       console.error("ERROR: can't move task down");
@@ -50,6 +65,6 @@ class Todo {
   }
   clearTaskList() {
     this.todoList = [];
-    this.saveData();
+    this.saveDataLocalStorage();
   }
 }

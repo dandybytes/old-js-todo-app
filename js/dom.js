@@ -8,7 +8,7 @@ const todoUL = document.querySelector('.todo-ul');
 
 
 
-const createElement = (tag, className, innerHTML, attributeKey, attributeValue) => {
+const createHTMLelement = (tag, className, innerHTML, attributeKey, attributeValue) => {
   const el = document.createElement(tag);
   if(className) el.className = className;
   if(innerHTML) el.innerHTML = innerHTML;
@@ -18,38 +18,38 @@ const createElement = (tag, className, innerHTML, attributeKey, attributeValue) 
 
 
 
-const addButtonOnClickEvent = (buttonElementVariable, functionToRunOnButtonClick) => {
+const addButtonOnClickEvent = (buttonElementVariable, functionToRunOnButtonClick, todoDataList) => {
   buttonElementVariable.addEventListener('click', function(e) {
     const taskNum = e.target.parentElement.parentElement.getAttribute('task');
     todo[functionToRunOnButtonClick](taskNum);
-    renderTodoUL();
+    renderTodoUL(todoDataList);
   });
 }
 
 
 
 //*********************  START ****************************
-const renderTodoUL = () => {
+const renderTodoUL = (todoDataList) => {
   todoUL.innerHTML = "";
-  if (todo.todoList.length === 0) {
+  if (todoDataList.length === 0) {
     status.style.display = 'block';
   } else {
     status.style.display = 'none';
-    todo.todoList.forEach((taskText, index, taskList) => {
-      const li = createElement('li', '', '', 'task', index);
-      const p = createElement('p', 'task-text', taskText);
-      const div = createElement('div', 'buttons');
+    todoDataList.forEach((taskObject, index, taskList) => {
+      const li = createHTMLelement('li', '', '', 'task', index);
+      const p = createHTMLelement('p', 'task-text', taskObject.task);
+      const div = createHTMLelement('div', 'buttons');
   
-      const btnUp = createElement('button', 'btn-todo-up', '&uarr;', 'title', 'move task up');
+      const btnUp = createHTMLelement('button', 'btn-todo-up', '&uarr;', 'title', 'move task up');
       if(index === 0) btnUp.style.display = 'none';
-      addButtonOnClickEvent(btnUp, 'moveTaskUp');
+      addButtonOnClickEvent(btnUp, 'moveTaskUp', todoDataList);
         
-      const btnDown = createElement('button', 'btn-todo-down', '&darr;', 'title', 'move task down');
+      const btnDown = createHTMLelement('button', 'btn-todo-down', '&darr;', 'title', 'move task down');
       if(index === taskList.length - 1) btnDown.style.display = 'none';
-      addButtonOnClickEvent(btnDown, 'moveTaskDown');
+      addButtonOnClickEvent(btnDown, 'moveTaskDown', todoDataList);
   
-      const btnRem = createElement('button', 'btn-todo-remove', 'X', 'title', 'remove task');
-      addButtonOnClickEvent(btnRem, 'removeTask');
+      const btnRem = createHTMLelement('button', 'btn-todo-remove', 'X', 'title', 'remove task');
+      addButtonOnClickEvent(btnRem, 'removeTask', todoDataList);
   
       [btnUp, btnDown, btnRem].forEach(btn => div.appendChild(btn));
       li.appendChild(p);
@@ -63,12 +63,12 @@ const renderTodoUL = () => {
 
 
 //*********************  START ****************************
-const enableTodoInput = () => {
+const enableTodoInput = (todoDataList) => {
   btnAdd.addEventListener('click', function(e) {
     if(taskInput.value.trim()) {
       todo.addTask(taskInput.value);
       taskInput.value = "";
-      renderTodoUL();
+      renderTodoUL(todoDataList);
     }
   });
   
@@ -77,7 +77,7 @@ const enableTodoInput = () => {
       // ^e.which identifies the key that triggered 'keydown'; code 13 --> 'enter' key
       todo.addTask(taskInput.value);
       taskInput.value = "";
-      renderTodoUL();
+      renderTodoUL(todoDataList);
     }
   });
 }
