@@ -30,6 +30,7 @@ header h1 {
 
 header h2 {
   font-size: 1.5rem;
+  font-weight: 300;
   color: #aaa;
   margin-bottom: 0.75rem;
 }
@@ -59,7 +60,7 @@ header input:focus {
   background: white;
 }
 
-header button {
+header .btn-todo-add {
   width: 10%;
   min-width: 5rem;
   outline: none;
@@ -72,7 +73,44 @@ header button {
   transition: opacity 0.2s;
 }
 
-header button:hover {
+header .btn-todo-add:hover {
+  opacity: 1;
+}
+
+header .menu {
+  margin: 0;
+  /* border: 1px solid red; */
+  padding: 0.5rem;
+  display: flex;
+  /* justify-content: center; */
+}
+
+header .menu button {
+  outline: none;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  margin: 0 2rem;
+  padding: 0.5rem;
+  color: #ddd;
+  background-color: transparent;
+  font-weight: 100;
+}
+
+header .menu button:hover {
+  background-color: #ddd;
+  color: #0C2C45;
+}
+
+header .menu button.red {
+  border-color: tomato;
+  color: tomato;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+header .menu button.red:hover {
+  background-color: tomato;
+  color: #fff;
   opacity: 1;
 }
 
@@ -105,10 +143,41 @@ main li:nth-child(2n) {
   background-color: #ececec;
 }
 
-main li p {
+main li .task-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+main li .checkbox {
+  margin-left: 0.5rem;
+  border: 1px solid #666;
+  border-radius: 50%;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: #999;
+  opacity: 0.7;
+}
+
+main li .checkbox.checked {
+  background-color: teal;
+}
+
+main li .checkbox:hover {
+  width: 1.75rem;
+  height: 1.75rem;
+  opacity: 1;
+  box-shadow: 0.1rem 0.1rem 0.5rem #333;
+}
+
+main li .task-text {
   font-size: 1.1rem;
   margin-left: 1rem;
   color: #0C2C45;
+}
+
+main li .task-text.crossed {
+  text-decoration: line-through;
 }
 
 main li .buttons {

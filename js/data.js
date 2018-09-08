@@ -41,6 +41,18 @@ class Todo {
       console.error("ERROR: can't remove task");
     }
   }
+  switchTasks(numCurrentTask, numOtherTask) {
+    numCurrentTask = parseInt(numCurrentTask);
+    numOtherTask = parseInt(numOtherTask);
+    if(numOtherTask >= 0 && numOtherTask < this.todoList.length) {
+      try {
+        [this.todoList[numCurrentTask], this.todoList[numOtherTask]] = [this.todoList[numOtherTask], this.todoList[numCurrentTask]];
+        this.saveDataLocalStorage();
+      } catch (e) {
+        console.error("ERROR: can't switch tasks");
+      }
+    }
+  }
   moveTaskUp(taskNum) {
     taskNum = parseInt(taskNum);
     try {

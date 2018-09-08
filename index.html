@@ -17,16 +17,23 @@
       <h2>make your own to-do list</h2>
       <div class="input-wrapper">
         <input class="todo-input" type="text" placeholder="enter a task">
-        <button class="btn btn-todo-add">add</button>
+        <button class="btn-todo-add">add</button>
+      </div>
+      <div class="menu">
+        <button class="btn-toggle-completed">hide completed</button>
+        <button class="btn-remove-all red">remove all tasks</button>
       </div>
     </header>
 
     <main>
       <p class="status">no tasks to display</p>
       <ul class="todo-ul">
-        <!-- below: mockup of todo list item -->
+        <!-- see below: mockup of todo list item -->
         <!-- <li task="0">
-          <p class="task-text">task 1</p>
+          <div class="task-wrapper">
+            <span class="checkbox checked"></span>
+            <span class="task-text">task 1</span>
+          </div>
           <div class="buttons">
             <button class="btn btn-todo-up">&uarr;</button>
             <button class="btn btn-todo-down">&darr;</button>
